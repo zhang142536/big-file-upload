@@ -20,10 +20,11 @@ const upload = async () => {
   }
   // 创建切片列表
   const chunkList = createChunk(files.value)
-  // 生成文件md5值
+  console.log(chunkList, 'chunkList')
+  // // 生成文件md5值
   const md5 = await createMd5(chunkList)
   console.log(md5)
-  // 验证文件状态接口
+  // // 验证文件状态接口
   const { uploadedList, url } = await verifyFile(md5, getExtension(files.value.name))
   if (url) {
     console.log('文件上传成功')
@@ -44,7 +45,8 @@ const upload = async () => {
       })
     }
   })
-  // 上传切片
+  console.log(needUploadList, 'needUploadList')
+  // // 上传切片
   Promise.all(needUploadList.map(item => {
     // console.log('需要上传的切片', item)
     const data = new FormData()
